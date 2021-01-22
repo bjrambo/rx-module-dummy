@@ -12,29 +12,76 @@ class DummyAdminController extends Dummy
 	/**
 	 * 관리자 설정 저장 액션 예제
 	 */
-	public function procDummyAdminInsertConfig()
+	public function procDummyAdminInsertDocuments()
 	{
-		// 현재 설정 상태 불러오기
-		$config = $this->getConfig();
-		
 		// 제출받은 데이터 불러오기
-		$vars = Context::getRequestVars();
+		$obj = Context::getRequestVars();
 		
-		// 제출받은 데이터를 각각 적절히 필터링하여 설정 변경
-		if (in_array($vars->example_config, ['Y', 'N']))
+		if($obj->dummy_count <= 0)
 		{
-			$config->example_config = $vars->example_config;
-		}
-		else
-		{
-			return $this->createObject(-1, '설정값이 이상함');
+			throw new Rhymix\Framework\Exceptions\InvalidRequest;
 		}
 		
-		// 변경된 설정을 저장
-		$output = $this->setConfig($config);
-		if (!$output->toBool())
+		$module_info = moduleModel::getModuleInfoByModuleSrl($obj->module_srl);
+		if(!$module_info->module_srl)
 		{
-			return $output;
+			throw new Rhymix\Framework\Exceptions\InvalidRequest;
+		}
+		$count = intval($obj->dummy_count);
+
+		$args = new stdClass();
+		$args->email_address = $this->user->email_address;
+		$args->homepage = $this->user->homepage;
+		$args->user_id = $this->user->user_id;
+		$args->user_name = $this->user->user_name;
+		$args->nick_name = $this->user->nick_name;
+		$args->member_srl = $this->user->member_srl;
+		if ($module_info->use_anonymous === 'Y')
+		{
+			$anonymousName = 'anonymous';
+			$args->email_address = $args->homepage = $args->user_id = '';
+			$args->user_name = $args->nick_name = $anonymousName;
+			$args->member_srl = -1 * $this->user->member_srl;
+		}
+		$args->module_srl = $module_info->module_srl;
+		$args->mid = $module_info->mid;
+
+		$args->regdate = date('YmdHis');
+		$args->status = 'PUBLIC';
+		$args->comment_status = 'ALLOW';
+		
+		$randTitle = array(
+			'지금은 소녀시대',
+			'앞으로도 소녀시대',
+			'테스트입니다.',
+			'야 바람이 잘 부는것 같아',
+			'지금 울와 나온다',
+		);
+		
+		$randContent = array(
+			'지금은 소녀시대',
+			'울와 나오는 중 티비 틀어봐바',
+			'와 진짜 끔찍하네',
+			'테스트입니다',
+			'조조겸심려',
+		);
+
+		$args->module_srl = $module_info->module_srl;
+		$oDocumentController = documentController::getInstance();
+		for($i = 0; $i <= $count; $i++)
+		{
+			$titleRandNumber = rand(0, 4);
+			$contentRandNumber = rand(0, 4);
+			$args->title = $randTitle[$titleRandNumber];
+			$args->content = $randContent[$contentRandNumber];
+			$args->document_srl = getNextSequence();
+			debugPrint($args);
+			$output = $oDocumentController->insertDocument($args);
+			debugPrint($output);
+			if(!$output->toBool())
+			{
+				return $output;
+			}
 		}
 		
 		// 설정 화면으로 리다이렉트

@@ -5,7 +5,7 @@
 	<actions>
 		<!-- 관리자 액션 -->
 		<action name="dispDummyAdminConfig" type="view" menu_name="dummy" admin_index="true" />
-		<action name="procDummyAdminInsertConfig" type="controller" />
+		<action name="procDummyAdminInsertDocuments" type="controller" />
 		<!-- 일반 액션 -->
 		<action name="dispDummyIndex" type="view" index="true" />
 	</actions>

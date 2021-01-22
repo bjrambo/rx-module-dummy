@@ -11,7 +11,7 @@
 
 <form class="x_form-horizontal" action="./" method="post" id="dummy">
 	<input type="hidden" name="module" value="dummy" />
-	<input type="hidden" name="act" value="procDummyAdminInsertConfig" />
+	<input type="hidden" name="act" value="procDummyAdminInsertDocuments" />
 	<input type="hidden" name="success_return_url" value="{getRequestUriByServerEnviroment()}" />
 	<input type="hidden" name="xe_validator_id" value="modules/dummy/tpl/config/1" />
 	
@@ -21,12 +21,17 @@
 	
 	<section class="section">
 		<div class="x_control-group">
-			<label class="x_control-label" for="example_config">{$lang->cmd_dummy_example_config}</label>
+			<label class="x_control-label" for="dummy_count">더미 게시글갯수</label>
 			<div class="x_controls">
-				<select name="example_config" id="example_config">
-					<option value="Y" selected="selected"|cond="$dummy_config->example_config !== 'N'">{$lang->cmd_yes}</option>
-					<option value="N" selected="selected"|cond="$dummy_config->example_config === 'N'">{$lang->cmd_no}</option>
-				</select>
+				<input type="number" name="dummy_count" value="" id="dummy_count" />
+				<p>더미 갯수를 선택합니다.</p>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="module_srl">게시판 모듈 번호</label>
+			<div class="x_controls">
+				<input type="number" name="module_srl" value="" id="module_srl" />
+				<p>모듈번호.</p>
 			</div>
 		</div>
 	</section>
