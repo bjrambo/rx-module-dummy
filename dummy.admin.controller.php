@@ -68,8 +68,18 @@ class DummyAdminController extends Dummy
 
 		$args->module_srl = $module_info->module_srl;
 		$oDocumentController = documentController::getInstance();
+
+		$time_pre = microtime(true);
+		
 		for($i = 0; $i <= $count; $i++)
 		{
+			$time_post = microtime(true);
+			$exec_time = $time_post - $time_pre;
+			if($exec_time > 25.0)
+			{
+				throw new Rhymix\Framework\Exception("글 등록중 시간이 초과되었습니다. 총 {$i}개의 게시글을 등록 하였습니다.");
+			}
+			
 			$titleRandNumber = rand(0, 4);
 			$contentRandNumber = rand(0, 4);
 			$args->title = $randTitle[$titleRandNumber];
