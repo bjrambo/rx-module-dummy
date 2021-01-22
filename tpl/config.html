@@ -27,11 +27,16 @@
 				<p>더미 갯수를 선택합니다.</p>
 			</div>
 		</div>
+
 		<div class="x_control-group">
 			<label class="x_control-label" for="module_srl">게시판 모듈 번호</label>
 			<div class="x_controls">
-				<input type="number" name="module_srl" value="" id="module_srl" />
-				<p>모듈번호.</p>
+				<select name="module_srl" id="module_srl">
+					<option value="0">{$lang->notuse}</option>
+					<option loop="$board_list => $key, $val" value="{$val->module_srl}" >{$val->browser_title} ({$val->module_srl})</option>
+				</select>
+				<a href="#layout_help" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
+				<p id="layout_help" class="x_help-block" hidden>{$lang->about_layout}</p>
 			</div>
 		</div>
 	</section>

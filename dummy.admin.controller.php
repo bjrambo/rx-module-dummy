@@ -85,9 +85,7 @@ class DummyAdminController extends Dummy
 			$args->title = $randTitle[$titleRandNumber];
 			$args->content = $randContent[$contentRandNumber];
 			$args->document_srl = getNextSequence();
-			debugPrint($args);
 			$output = $oDocumentController->insertDocument($args);
-			debugPrint($output);
 			if(!$output->toBool())
 			{
 				return $output;

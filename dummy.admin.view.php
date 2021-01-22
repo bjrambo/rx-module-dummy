@@ -26,8 +26,12 @@ class DummyAdminView extends Dummy
 		// 현재 설정 상태 불러오기
 		$config = $this->getConfig();
 		
+		
+		$boardModuleList = executeQueryArray('dummy.getAllBoardList');
+		
 		// Context에 세팅
 		Context::set('dummy_config', $config);
+		Context::set('board_list', $boardModuleList->data);
 		
 		// 스킨 파일 지정
 		$this->setTemplateFile('config');
