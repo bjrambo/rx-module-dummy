@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<module>
+	<grants>
+	</grants>
+	<actions>
+		<!-- 관리자 액션 -->
+		<action name="dispDummyAdminConfig" type="view" menu_name="dummy" admin_index="true" />
+		<action name="procDummyAdminInsertConfig" type="controller" />
+		<!-- 일반 액션 -->
+		<action name="dispDummyIndex" type="view" index="true" />
+	</actions>
+	<menus>
+		<menu name="dummy" type="all">
+			<title xml:lang="ko">더미</title>
+		</menu>
+	</menus>
+</module>

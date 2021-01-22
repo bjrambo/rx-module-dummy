@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skin version="0.2">
+	<title xml:lang="ko">기본 스킨</title>
+	<description xml:lang="ko">기본 스킨</description>
+	<version>1.0.0</version>
+	<date>2021-01-23</date>
+	<author email_address="" link="">
+		<name xml:lang="ko">BJRambo</name>
+	</author>
+	<extra_vars>
+		<var name="example" type="text">
+			<title xml:lang="ko">스킨 변수 예제</title>
+			<description xml:lang="ko">스킨 변수 예제입니다.</description>
+		</var>
+	</extra_vars>
+</skin>
