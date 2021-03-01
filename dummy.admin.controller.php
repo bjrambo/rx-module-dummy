@@ -50,22 +50,6 @@ class DummyAdminController extends Dummy
 		$args->status = 'PUBLIC';
 		$args->comment_status = 'ALLOW';
 		
-		$randTitle = array(
-			'지금은 소녀시대',
-			'앞으로도 소녀시대',
-			'테스트입니다.',
-			'야 바람이 잘 부는것 같아',
-			'지금 울와 나온다',
-		);
-		
-		$randContent = array(
-			'지금은 소녀시대',
-			'울와 나오는 중 티비 틀어봐바',
-			'와 진짜 끔찍하네',
-			'테스트입니다',
-			'조조겸심려',
-		);
-
 		$args->module_srl = $module_info->module_srl;
 		$oDocumentController = documentController::getInstance();
 
@@ -80,10 +64,10 @@ class DummyAdminController extends Dummy
 				throw new Rhymix\Framework\Exception("글 등록중 시간이 초과되었습니다. 총 {$i}개의 게시글을 등록 하였습니다.");
 			}
 			
-			$titleRandNumber = rand(0, 4);
-			$contentRandNumber = rand(0, 4);
-			$args->title = $randTitle[$titleRandNumber];
-			$args->content = $randContent[$contentRandNumber];
+			$titleRandNumber = rand(0, count(self::$arrayDocumentTitle) - 1);
+			$contentRandNumber = rand(0, count(self::$arrayDocumentContent) -1);
+			$args->title = self::$arrayDocumentTitle[$titleRandNumber];
+			$args->content = self::$arrayDocumentContent[$contentRandNumber];
 			$args->document_srl = getNextSequence();
 			$output = $oDocumentController->insertDocument($args);
 			if(!$output->toBool())

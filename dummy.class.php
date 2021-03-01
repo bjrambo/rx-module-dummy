@@ -41,6 +41,24 @@ class Dummy extends ModuleObject
 	 */
 	protected static $_cache_handler_cache = null;
 	
+	protected static $arrayDocumentTitle = array(
+		'안녕하세요',
+		'반갑습니다.',
+		'이 글이 생성될까요?',
+		'제목을 입력 하였습니다.',
+		'이 글은 더미로 생성하는 글입니다.',
+		'더미글을 알아서 생성합니다.',
+	);
+	
+	protected static $arrayDocumentContent = array(
+		'안녕하세요 인사드립니다.',
+		'이 글은 생성되었습니다.',
+		'키가 해깔리는 것 같습니다.',
+		'그래서 복구 하였습니다.',
+		'작업하고 계신가요?',
+		'날려주기를 사용하는 것 입니다.',
+	);
+	
 	/**
 	 * 모듈 설정을 가져오는 함수.
 	 * 
